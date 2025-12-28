@@ -43,4 +43,8 @@ userSchema.pre("save", async function(){
     this.password = await bcrypt.hash(this.password, Number(`${process.env.ENCRYPTION_ROUND}`));
 })
 
+userSchema.methods.isPasswordCorrect = async function(password){
+    return await bcrypt.compare(password, this.password);
+}
+
 export const User = mongoose.model("User", userSchema);
