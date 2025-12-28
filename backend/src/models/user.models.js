@@ -63,7 +63,7 @@ userSchema.methods.generateRefreshToken = function(){
         _id: this._id,
     },
     process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }  // We will make a database query if the `refeshToken` is not present we will not allow the `accessToken` to get refreshed and will forcefully logout the user
+    { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }
     );
 }
 
