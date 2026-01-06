@@ -26,10 +26,20 @@ app.use(cookieParser())
 
 import userRouter from "./routes/user.routes.js";
 import { errorHandler } from "./middlewares/error.middlewares.js";
+import { verifyJWT } from "./middlewares/auth.middlewares.js";
+import { ApiResponse } from "./utils/ApiResponse.js";
 
 // routes
 
 app.use("/api/v1/users", userRouter);
+app.get("/api/v1/verify", verifyJWT, (req, res) => {
+    return res
+        .status(200)
+        .json(new ApiResponse(200,
+            { user: req.user },
+            "User verified"
+        ));
+});
 
 app.use(errorHandler);
 

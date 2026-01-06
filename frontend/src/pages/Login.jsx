@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import { useEffect } from 'react';
 import api from '../api/axios.js';
+import { useAuth } from '../context/AuthContext.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [error, setError] = useState(null);
+  const { login } = useAuth();
+  const navigate = useNavigate()
 
   const API = api;
 
@@ -27,7 +31,12 @@ const Login = () => {
       const response = await API.post("/users/login", {email, password});
 
       if (response.data.success){
-        alert("Successfully login");
+        await login(response.data.data.user);
+        if (response.data.data.user.role === "admin"){
+          navigate('/admin-dashboard');
+        } else{
+          navigate('/employee-dashboard');
+        }
       }
       
     } catch (error) {
