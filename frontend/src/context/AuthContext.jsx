@@ -7,6 +7,7 @@ const API = api;
 
 const AuthContext = ({children}) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,6 +20,7 @@ const AuthContext = ({children}) => {
           }
 
         } catch (error) {
+          setUser(null);
           if (error.response?.status === 401){
             navigate('/login', { replace: true });
             return;
@@ -26,6 +28,8 @@ const AuthContext = ({children}) => {
           
           console.log("Unexpected verify error", error.message);
 
+        } finally{
+          setLoading(false);
         }
       }
       verifyUser();
@@ -40,7 +44,7 @@ const AuthContext = ({children}) => {
     }
 
   return (
-    <UserContext.Provider value={{user, login, logout}}>
+    <UserContext.Provider value={{user, login, logout, loading}}>
         {children}
     </UserContext.Provider>
   )
