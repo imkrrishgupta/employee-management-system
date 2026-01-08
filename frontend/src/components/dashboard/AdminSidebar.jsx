@@ -10,7 +10,6 @@ import { FaCogs } from "react-icons/fa";
 const AdminSidebar = () => {
   return (
     <div className='bg-gray-800 text-white h-screen fixed left-0 top-0 bottom-0 space-y-2 w-64'>
-        <Link to='/admin-dashboard'>
         
             <div className='h-12 flex items-center justify-center border-b border-gray-600'>
                 <h3 className='font-serif text-2xl text-centre'>Employee MS</h3>
@@ -50,7 +49,6 @@ const AdminSidebar = () => {
 
             </div>
             
-        </Link>
     </div>
   )
 }
