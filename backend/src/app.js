@@ -28,6 +28,7 @@ import userRouter from "./routes/user.routes.js";
 import { errorHandler } from "./middlewares/error.middlewares.js";
 import { verifyJWT } from "./middlewares/auth.middlewares.js";
 import { ApiResponse } from "./utils/ApiResponse.js";
+import departmentRouter from "./routes/department.routes.js";
 
 // routes
 
@@ -40,6 +41,8 @@ app.get("/api/v1/verify", verifyJWT, (req, res) => {
             "User verified"
         ));
 });
+
+app.use("/api/v1/departments", departmentRouter);
 
 app.use(errorHandler);
 
