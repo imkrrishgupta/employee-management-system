@@ -17,7 +17,11 @@ const uploadOnCloudinary = async (localFilePath) => {
                 resource_type: "image"
             }
         )
-        console.log("File uploaded on cloudinary. File src: " + response.url)
+        
+        if (process.env.NODE_ENV !== "production"){
+            console.log("File uploaded on cloudinary")
+        }
+
         fs.unlinkSync(localFilePath);
         return response;
 
