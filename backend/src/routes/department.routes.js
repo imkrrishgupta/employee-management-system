@@ -12,7 +12,7 @@ import {
 
 const router = Router();
 
-router.route("/").get(verifyJWT, getDepartments);
+router.route("/").get(verifyJWT, isAdmin, getDepartments);
 router.route("/add").post(verifyJWT, isAdmin, addDepartment);
 router.route("/:_id").get(verifyJWT, isAdmin, editDepartment);
 router.route("/:_id").put(verifyJWT, isAdmin, updateDepartment);
