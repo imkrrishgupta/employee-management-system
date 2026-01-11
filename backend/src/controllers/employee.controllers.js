@@ -1,6 +1,5 @@
 import { Employee } from "../models/employee.models.js";
 import { User } from "../models/user.models.js";  // Will create user account for every employee
-import { Department } from "../models/department.models.js";  // Will update department in update Employee
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -175,9 +174,29 @@ const updateEmployee = asyncHandler(async (req, res) => {
 
 })
 
+const fetchEmployeesByDepId = asyncHandler(async (req, res) => {
+    const { _id } = req.params;
+
+    const employees = await Employee.find({ department: _id });
+    
+    if (!employees){
+        throw new ApiError(404, "No record of Employee found");
+    }
+    
+    return res
+        .status(200)
+        .json(new ApiResponse(
+            200,
+            { employees: employees },
+            "Employee fetched successfully"
+        ));
+
+})
+
 export {
     addEmployee,
     getEmployees,
     getEmployee,
-    updateEmployee
+    updateEmployee,
+    fetchEmployeesByDepId
 };
