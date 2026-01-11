@@ -29,6 +29,7 @@ import { errorHandler } from "./middlewares/error.middlewares.js";
 import { verifyJWT } from "./middlewares/auth.middlewares.js";
 import { ApiResponse } from "./utils/ApiResponse.js";
 import departmentRouter from "./routes/department.routes.js";
+import employeeRouter from "./routes/employee.routes.js";
 
 // routes
 
@@ -43,6 +44,8 @@ app.get("/api/v1/verify", verifyJWT, (req, res) => {
 });
 
 app.use("/api/v1/departments", departmentRouter);
+
+app.use("/api/v1/employees", employeeRouter);
 
 app.use(errorHandler);
 
