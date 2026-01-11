@@ -32,7 +32,8 @@ const userSchema = new Schema(
             default: "employee",
         },
         avatar: {
-            type: String
+            type: String,
+            default: process.env.DEFAULT_AVATAR
         },
         refreshToken: {
             type: String
