@@ -7,7 +7,8 @@ import {
     addEmployee,
     getEmployees,
     getEmployee,
-    updateEmployee
+    updateEmployee,
+    fetchEmployeesByDepId
 } from "../controllers/employee.controllers.js";
 
 const router = Router();
@@ -24,5 +25,7 @@ router.route("/add").post(
 router.route("/:_id").get(verifyJWT, isAdmin, getEmployee);
 
 router.route("/:_id").put(verifyJWT, isAdmin, updateEmployee);
+
+router.route("/departments/:_id").get(verifyJWT, isAdmin, fetchEmployeesByDepId);
 
 export default router;
