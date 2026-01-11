@@ -24,6 +24,31 @@ export const fetchDepartments = async () => {
 
 };
 
+// Employees for salary form
+
+export const getEmployees = async (_id) => {
+  let employees;
+
+  const API = api;
+
+  try {
+    const response = await API.get(`/employees/departments/${_id}`);
+
+    if (response.data.success) {
+      employees = response.data.data.employees;
+    }
+
+  } catch (error) {
+    if (error.response && !error.response.data.success) {
+      alert(error.response.data.error);
+    }
+
+  }
+  
+  return employees;
+
+};
+
 export const columns = [
 
   // Inside this array, we will define all the columns that we want in the employee table
@@ -102,7 +127,10 @@ export const EmployeeButtons = ({ _id }) => {
         Edit
       </button>
 
-      <button className="px-4 py-1 bg-amber-500 hover:bg-amber-600 text-white rounded-md">
+      <button 
+        className="px-4 py-1 bg-amber-500 hover:bg-amber-600 text-white rounded-md"
+        onClick={() => navigate(`/admin-dashboard/employees/salary/${_id}`)}
+      >
         Salary
       </button>
 
