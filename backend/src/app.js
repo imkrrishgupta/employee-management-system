@@ -30,6 +30,7 @@ import { verifyJWT } from "./middlewares/auth.middlewares.js";
 import { ApiResponse } from "./utils/ApiResponse.js";
 import departmentRouter from "./routes/department.routes.js";
 import employeeRouter from "./routes/employee.routes.js";
+import salaryRouter from "./routes/salary.routes.js";
 
 // routes
 
@@ -46,6 +47,8 @@ app.get("/api/v1/verify", verifyJWT, (req, res) => {
 app.use("/api/v1/departments", departmentRouter);
 
 app.use("/api/v1/employees", employeeRouter);
+
+app.use("/api/v1/salary", salaryRouter);
 
 app.use(errorHandler);
 
