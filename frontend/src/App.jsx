@@ -4,7 +4,7 @@ import AdminDashboard from "./pages/AdminDashboard.jsx";
 import EmployeeDashboard from "./pages/EmployeeDashboard.jsx";
 import PrivateRoutes from "./utils/PrivateRoutes.jsx";
 import RoleBasedRoutes from "./utils/RoleBasedRoutes.jsx";
-import AdminSummary from "./components/dashboard/AdminSummary.jsx";
+import AdminSummary from "./components/dashboard/admin/AdminSummary.jsx";
 import DepartmentList from "./components/departments/DepartmentList.jsx";
 import AddDepartment from "./components/departments/AddDepartment.jsx";
 import EditDepartment from "./components/departments/EditDepartment.jsx";
@@ -49,7 +49,22 @@ function App() {
 
       </Route>
         
-      <Route path="/employee-dashboard" element={<EmployeeDashboard />} />  {/* Employee dashboard */}
+      {/* Employee dashboard */}
+
+      <Route 
+        path="/employee-dashboard" 
+        element={
+          <RoleBasedRoutes requiredRole={["employee"]}>
+            <EmployeeDashboard />
+          </RoleBasedRoutes>
+        } 
+      >
+
+        <Route index element={<EmployeeSummaryCard />} />
+        <Route path="/employee-dashboard/profile" element={<DepartmentList />} />
+
+
+      </Route>
     
     </Routes>
   )
