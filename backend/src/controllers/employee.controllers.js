@@ -116,7 +116,9 @@ const getEmployees = asyncHandler(async (req, res) => {
 const getEmployee = asyncHandler(async (req, res) => {
     const { _id } = req.params;
 
-    const employee = await Employee.findById({ _id })
+    let employee;
+
+    employee = await Employee.findById({ _id })
         .populate({
             path: "userId",
             select: "name email _id avatar"
@@ -126,6 +128,18 @@ const getEmployee = asyncHandler(async (req, res) => {
             select: "dep_name"
         });
     
+    if (!employee){
+        employee = await Employee.findOne({userId: _id})  // We are doing this because as we have user information also stored in employee database...we check if the id is not found in ObjectId of employee then may it be userId
+            .populate({
+                path: "userId",
+                select: "name email _id avatar"
+            })
+            .populate({
+                path: "department",
+                select: "dep_name"
+            });
+    }
+
     if (!employee){
         throw new ApiError(404, "No record of Employee found");
     }

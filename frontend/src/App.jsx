@@ -14,6 +14,7 @@ import ViewEmployee from "./components/employees/ViewEmployee.jsx";
 import EditEmployee from "./components/employees/EditEmployee.jsx";
 import AddSalary from "./components/salary/AddSalary.jsx";
 import ViewSalary from "./components/salary/ViewSalary.jsx";
+import EmployeeSummaryCard from "./components/dashboard/employee/EmployeeSummaryCard.jsx";
 
 function App() {
 
@@ -61,7 +62,7 @@ function App() {
       >
 
         <Route index element={<EmployeeSummaryCard />} />
-        <Route path="/employee-dashboard/profile" element={<DepartmentList />} />
+        <Route path="/employee-dashboard/profile/:_id" element={<ViewEmployee />} />
 
 
       </Route>

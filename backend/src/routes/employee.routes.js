@@ -22,7 +22,7 @@ router.route("/add").post(
     addEmployee
 );
 
-router.route("/:_id").get(verifyJWT, isAdmin, getEmployee);
+router.route("/:_id").get(verifyJWT, getEmployee);
 
 router.route("/:_id").put(verifyJWT, isAdmin, updateEmployee);
 
