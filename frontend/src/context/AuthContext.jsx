@@ -40,6 +40,7 @@ const AuthContext = ({children}) => {
     }
 
     const logout = async () => {
+      await API.post("/users/logout");
       setUser(null);
     }
 
