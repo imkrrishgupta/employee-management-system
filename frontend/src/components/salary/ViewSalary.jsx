@@ -68,24 +68,29 @@ const ViewSalary = () => {
         {
             name: "Basic Salary",
             selector: row => row.basicSalary,
-            sortable: true
+            sortable: true,
+            center: true
         },
         {
             name: "Allowances",
-            selector: row => row.allowances
+            selector: row => row.allowances,
+            center: true
         },
         {
             name: "Deductions",
-            selector: row => row.deductions
+            selector: row => row.deductions,
+            center: true
         },
         {
             name: "Net Salary",
             selector: row => row.netSalary,
-            sortable: true
+            sortable: true,
+            center: true
         },
         {
             name: "Pay Date",
             selector: row => new Date(row.payDate).toLocaleDateString("en-IN"),
+            center: true
         }
     ];
 
