@@ -31,6 +31,7 @@ import { ApiResponse } from "./utils/ApiResponse.js";
 import departmentRouter from "./routes/department.routes.js";
 import employeeRouter from "./routes/employee.routes.js";
 import salaryRouter from "./routes/salary.routes.js";
+import leaveRouter from "./routes/leave.routes.js";
 
 // routes
 
@@ -49,6 +50,8 @@ app.use("/api/v1/departments", departmentRouter);
 app.use("/api/v1/employees", employeeRouter);
 
 app.use("/api/v1/salary", salaryRouter);
+
+app.use("/api/v1/leaves", leaveRouter);
 
 app.use(errorHandler);
 
