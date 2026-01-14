@@ -2,6 +2,7 @@ import { Salary } from "../models/salary.models.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { Employee } from "../models/employee.models.js";
 
 const addSalary = asyncHandler(async (req, res) => {
     const {employeeId, basicSalary, allowances, deductions, payDate} = req.body;
@@ -35,18 +36,30 @@ const addSalary = asyncHandler(async (req, res) => {
 const getSalary = asyncHandler(async (req, res) => {
     const { _id } = req.params;
 
-    const salary = await Salary.find({ employeeId: _id })
+    let salary;
+
+    salary = await Salary.find({employeeId: _id})
         .populate({
             path: "employeeId",
-            select: "_id userId",
+            select: "employeeId",
             populate: {
                 path: "userId",
-                select: "name email avatar"
+                select: "name avatar"
             }
-        });
+        })
 
-    if (!salary){
-        throw new ApiError(404, "Salary record not found");
+    if (!salary || salary.length < 1){
+        const employee = await Employee.findOne({userId: _id})
+
+        salary = await Salary.find({employeeId: employee._id})
+            .populate({
+                path: "employeeId",
+                select: "employeeId",
+                populate: {
+                    path: "userId",
+                    select: "name avatar"
+                }
+            })
     }
 
     return res

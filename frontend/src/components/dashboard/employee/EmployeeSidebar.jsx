@@ -35,7 +35,7 @@ const EmployeeSidebar = () => {
                     <span>Leaves</span>
                 </NavLink>
 
-                <NavLink to='/employee-dashboard/salary' className={({isActive}) => `${isActive ? "bg-[#373A8F]" : " "} flex items-center space-x-4 py-2.5 px-4 rounded-lg`}>
+                <NavLink to={`/employee-dashboard/salary/${user._id}`} className={({isActive}) => `${isActive ? "bg-[#373A8F]" : " "} flex items-center space-x-4 py-2.5 px-4 rounded-lg`}>
                     <FaCalendarAlt />
                     <span>Salary</span>
                 </NavLink>

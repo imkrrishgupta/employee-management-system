@@ -9,7 +9,7 @@ import {
 
 const router = Router();
 
-router.route("/:_id").get(verifyJWT, isAdmin, getSalary);
+router.route("/:_id").get(verifyJWT, getSalary);
 
 router.route("/add").post(verifyJWT, isAdmin, addSalary);
 
