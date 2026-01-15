@@ -51,22 +51,7 @@ const LeaveList = () => {
         {
             name: "Status",
             selector: (row) => row.status,
-            sortable: true,
             center: true,
-            cell: (row) => (
-                <span
-                    className={`px-2 py-1 rounded text-white text-sm ${
-                    row.status === "Approved"
-                    ? "bg-green-500"
-                    : row.status === "Rejected"
-                    ? "bg-red-500"
-                    : "bg-yellow-500"
-                    }`}
-                >
-                    {row.status}
-                </span>
-
-            )
         }
     ];
 
