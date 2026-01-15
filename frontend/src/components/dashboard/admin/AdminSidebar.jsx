@@ -32,7 +32,7 @@ const AdminSidebar = () => {
                     <span>Departments</span>
                 </NavLink>
 
-                <NavLink to='/admin-dashboard' className='flex items-center space-x-4 py-2.5 px-4 rounded-lg'>
+                <NavLink to='/admin-dashboard/leaves' className='flex items-center space-x-4 py-2.5 px-4 rounded-lg'>
                     <FaCalendarAlt />
                     <span>Leaves</span>
                 </NavLink>

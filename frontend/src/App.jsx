@@ -18,13 +18,14 @@ import EmployeeSummaryCard from "./components/dashboard/employee/EmployeeSummary
 import LeaveList from "./components/leave/LeaveList.jsx";
 import AddLeave from "./components/leave/AddLeave.jsx";
 import EmployeeSettings from "./components/dashboard/employee/EmployeeSettings.jsx";
+import RouteRedirect from "./utils/RouteRedirect.jsx";
 
 function App() {
 
   return (
     <Routes>
       
-      <Route path="/" element={<Navigate to="/admin-dashboard" />} />  {/* Main website */}
+      <Route path="/" element={<RouteRedirect />} />  {/* Main website */}
       <Route path="/login" element={<Login />} />  {/* Login page */}
 
       {/* Admin dashboard */}
