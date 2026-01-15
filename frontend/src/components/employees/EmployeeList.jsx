@@ -27,6 +27,7 @@ const EmployeeList = () => {
               sno: sno++,
               dep_name: emp.department.dep_name,
               name: emp.userId.name,
+              empId: emp.employeeId,
               dob: new Date(emp.dob).toLocaleDateString("en-IN"),  // Doing this as the dob coming in frontend is of string type so we will pass this as an object then convert it into string type and in indian format
               avatar: emp.userId.avatar,
               action: (<EmployeeButtons _id={emp._id} />)
@@ -53,7 +54,7 @@ const EmployeeList = () => {
   }, [])
 
   const filterEmployees = (e) => {
-    const records = employees.filter((emp) => emp.name.toLowerCase().includes(e.target.value.toLowerCase()));
+    const records = employees.filter((emp) => emp.empId.toLowerCase().includes(e.target.value.toLowerCase()));
     setFilteredEmployees(records);
   }
 
@@ -71,7 +72,7 @@ const EmployeeList = () => {
           
             <input 
               type="text" 
-              placeholder='Search By Name' 
+              placeholder='Search By Emp Id' 
               onChange={filterEmployees}
               className='px-4 py-0.5 border rounded text-gray-800' 
             />

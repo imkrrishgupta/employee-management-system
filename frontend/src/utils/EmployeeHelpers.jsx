@@ -60,6 +60,11 @@ export const columns = [
     center: true
   },
   {
+    name: "Emp Id",
+    selector: (row) => row.empId,
+    width: "100px"
+  },
+  {
     name: "Name",
     selector: (row) => row.name,
     sortable: true,
@@ -100,7 +105,7 @@ export const columns = [
   {
     name: "Action",
     selector: (row) => row.action,
-    width: "500px",
+    width: "400px",
     center: true,
     ignoreRowClick: true,
   },
