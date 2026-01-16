@@ -21,6 +21,7 @@ import EmployeeSettings from "./components/dashboard/employee/EmployeeSettings.j
 import RouteRedirect from "./utils/RouteRedirect.jsx";
 import ViewLeave from "./components/leave/ViewLeave.jsx";
 import LeaveDetails from "./components/leave/LeaveDetails.jsx";
+import AdminSettings from "./components/dashboard/admin/AdminSettings.jsx";
 
 function App() {
 
@@ -57,6 +58,8 @@ function App() {
         <Route path="/admin-dashboard/leaves" element={<ViewLeave />} />
         <Route path="/admin-dashboard/leaves/:_id" element={<LeaveDetails />} />
         <Route path="/admin-dashboard/employees/leaves/:_id" element={<LeaveList />} />
+
+        <Route path="/admin-dashboard/settings" element={<AdminSettings />} />
 
       </Route>
         

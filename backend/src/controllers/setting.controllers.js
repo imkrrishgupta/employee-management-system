@@ -5,7 +5,7 @@ import { User } from "../models/user.models.js";
 
 
 const changePassword = asyncHandler(async (req, res) => {
-    const {userId, oldPassword, newPassword, changePassword} = req.body;
+    const {userId, oldPassword, newPassword } = req.body;
 
     const user = await User.findById({_id: userId});
 
