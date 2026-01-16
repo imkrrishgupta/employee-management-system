@@ -30,7 +30,7 @@ const EmployeeSidebar = () => {
                     <span>My Profile</span>
                 </NavLink>
 
-                <NavLink to='/employee-dashboard/leaves' className={({isActive}) => `${isActive ? "bg-[#373A8F]" : " "} flex items-center space-x-4 py-2.5 px-4 rounded-lg`}>
+                <NavLink to={`/employee-dashboard/leaves/${user._id}`} className={({isActive}) => `${isActive ? "bg-[#373A8F]" : " "} flex items-center space-x-4 py-2.5 px-4 rounded-lg`}>
                     <FaBuilding />
                     <span>Leaves</span>
                 </NavLink>

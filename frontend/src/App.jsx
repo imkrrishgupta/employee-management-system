@@ -19,6 +19,8 @@ import LeaveList from "./components/leave/LeaveList.jsx";
 import AddLeave from "./components/leave/AddLeave.jsx";
 import EmployeeSettings from "./components/dashboard/employee/EmployeeSettings.jsx";
 import RouteRedirect from "./utils/RouteRedirect.jsx";
+import ViewLeave from "./components/leave/ViewLeave.jsx";
+import LeaveDetails from "./components/leave/LeaveDetails.jsx";
 
 function App() {
 
@@ -52,6 +54,10 @@ function App() {
 
         <Route path="/admin-dashboard/salary/add" element={<AddSalary />} />
 
+        <Route path="/admin-dashboard/leaves" element={<ViewLeave />} />
+        <Route path="/admin-dashboard/leaves/:_id" element={<LeaveDetails />} />
+        <Route path="/admin-dashboard/employees/leaves/:_id" element={<LeaveList />} />
+
       </Route>
         
       {/* Employee dashboard */}
@@ -67,7 +73,7 @@ function App() {
 
         <Route index element={<EmployeeSummaryCard />} />
         <Route path="/employee-dashboard/profile/:_id" element={<ViewEmployee />} />
-        <Route path="/employee-dashboard/leaves" element={<LeaveList />} />
+        <Route path="/employee-dashboard/leaves/:_id" element={<LeaveList />} />
         <Route path="/employee-dashboard/leaves/add-leave" element={<AddLeave />} />
         <Route path="/employee-dashboard/salary/:_id" element={<ViewSalary />} />
         <Route path="/employee-dashboard/settings" element={<EmployeeSettings />} />

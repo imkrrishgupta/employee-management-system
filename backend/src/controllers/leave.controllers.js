@@ -32,12 +32,16 @@ const addLeave = asyncHandler(async (req, res) => {
 
 });
 
-const getLeaves = asyncHandler(async (req, res) => {
+const getLeave = asyncHandler(async (req, res) => {
     const { _id } = req.params;
 
-    const employee = await Employee.findOne({userId: _id})
+    let employee = await Employee.findById(_id);
 
-    if (!employee){
+    if (!employee) {
+        employee = await Employee.findOne({ userId: _id });
+    }
+
+    if (!employee) {
         throw new ApiError(404, "Employee not found");
     }
 
@@ -46,11 +50,11 @@ const getLeaves = asyncHandler(async (req, res) => {
             path: "employeeId",
             populate: {
                 path: "userId",
-                select: "name avatar"
+                select: "name"
             }
-        })
+        });
 
-    if (!leaves){
+    if (leaves.length === 0) {
         throw new ApiError(404, "No leave record found");
     }
 
@@ -60,11 +64,97 @@ const getLeaves = asyncHandler(async (req, res) => {
             200,
             { leaves: leaves },
             "Leave records fetched successfully"
+        )
+    );
+});
+
+const getLeaves = asyncHandler(async (req, res) => {
+    const leaves = await Leave.find()
+        .populate({
+            path: "employeeId",
+            populate: [
+                {
+                    path: "department",
+                    select: "dep_name"
+                },
+                {
+                    path: "userId",
+                    select: "name avatar"
+                }
+            ]
+        })
+
+    if (!leaves){
+        throw new ApiError(404, "No leave record is found");
+    }
+
+    return res
+        .status(200)
+        .json(new ApiResponse(
+            200,
+            {leaves: leaves},
+            "All leaves fetched successfully"
+        ));
+
+});
+
+const getLeaveDetail = asyncHandler(async (req, res) => {
+    const { _id } = req.params;
+
+    const leave = await Leave.findById({ _id })
+        .populate({
+            path: "employeeId",
+            populate : [
+                {
+                    path: "department",
+                    select: "dep_name"
+                },
+                {
+                    path: "userId",
+                    select: "name avatar"
+                }
+            ]
+        })
+
+    if (!leave){
+        throw new ApiError(404, "No leave record found");
+    }
+
+    return res
+        .status(200)
+        .json(new ApiResponse(
+            200,
+            { leave: leave },
+            "Leave details fetched"
+        ));
+
+});
+
+const updateLeave = asyncHandler(async (req, res) => {
+    const { _id } = req.params;
+
+    const { status } = req.body;
+
+    const leave = await Leave.findByIdAndUpdate({ _id }, { status })
+
+    if (!leave){
+        throw new ApiError(404, "Leave not found");
+    }
+
+    return res
+        .status(200)
+        .json(new ApiResponse(
+            200,
+            { leave: leave },
+            "Leave status updated successfully"
         ));
 
 });
 
 export {
     addLeave,
-    getLeaves
+    getLeave,
+    getLeaves,
+    getLeaveDetail,
+    updateLeave
 };

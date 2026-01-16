@@ -29,7 +29,7 @@ const AddLeave = () => {
             const response = await API.post("/leaves/add", leave);
 
             if (response.data.success){
-                navigate("/employee-dashboard/leaves", { replace: true });
+                navigate(`/employee-dashboard/leaves/${user._id}`, { replace: true });
             }
 
         } catch (error) {

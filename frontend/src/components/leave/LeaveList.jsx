@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import api from '../../api/axios.js';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import { useAuth } from '../../context/AuthContext.jsx';
 
 const LeaveList = () => {
+    const { _id } = useParams();
+
     const { user } = useAuth();
     
     const [leaves, setLeaves] = useState([]);
@@ -60,7 +62,7 @@ const LeaveList = () => {
             setLeaveLoading(true);
 
         try {
-            const response = await API.get(`/leaves/${user._id}`);
+            const response = await API.get(`/leaves/${_id}`);
 
             if (response.data.success) {
                 let sno = 1;
@@ -83,7 +85,7 @@ const LeaveList = () => {
 
         } catch (error) {
             if (error.response && !error.response.data.success) {
-            alert(error.response.data.error);
+                setLeaveLoading(false);
 
             }
         } finally {
@@ -124,9 +126,11 @@ const LeaveList = () => {
                             onChange={filterLeaves}
                             className='px-4 py-0.5 border rounded text-gray-800' 
                         />
-
+                    
+                    {user.role === "employee" &&
                         <Link to="/employee-dashboard/leaves/add-leave" className='px-4 py-1 bg-[#6C63FF] hover:bg-[#5A52E0] rounded-lg text-white'>Add new Leave</Link>
-          
+                    }
+
                     </div>
 
                     <DataTable
