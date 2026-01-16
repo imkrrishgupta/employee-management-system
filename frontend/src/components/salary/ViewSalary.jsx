@@ -4,8 +4,9 @@ import api from '../../api/axios.js';
 import DataTable from 'react-data-table-component';
 
 const ViewSalary = () => {
-    const [salaries, setSalaries] = useState(null);
-    const [filteredSalaries, setFilteredSalaries] = useState(null);
+    const [salaries, setSalaries] = useState([]);
+    const [filteredSalaries, setFilteredSalaries] = useState([]);
+    const [salaryLoading, setSalaryLoading] = useState(false);
 
     const { _id } = useParams();
 
@@ -15,6 +16,8 @@ const ViewSalary = () => {
 
     const fetchSalaries = async () => {
         try {
+            setSalaryLoading(true);
+
             const response = await API.get(`/salary/${_id}`);
 
             if (response.data.success){
@@ -24,9 +27,11 @@ const ViewSalary = () => {
             
         } catch (error) {
             if (error.response && !error.response.data.success){
-                alert(error.response.data.error);
+                setSalaryLoading(false);
             }
 
+        } finally {
+            setSalaryLoading(false);
         }
     }
 
@@ -96,7 +101,7 @@ const ViewSalary = () => {
 
   return (
     <>
-        {filteredSalaries === null ? (
+        {salaryLoading ? (
             <div className="p-5">Loading...</div>
         ) : (
             <div className='p-5'>
