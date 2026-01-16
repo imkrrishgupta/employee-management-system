@@ -33,6 +33,7 @@ import employeeRouter from "./routes/employee.routes.js";
 import salaryRouter from "./routes/salary.routes.js";
 import leaveRouter from "./routes/leave.routes.js";
 import settingRouter from "./routes/setting.routes.js";
+import dashboardRouter from "./routes/dashboard.routes.js";
 
 // routes
 
@@ -55,6 +56,8 @@ app.use("/api/v1/salary", salaryRouter);
 app.use("/api/v1/leaves", leaveRouter);
 
 app.use("/api/v1/settings", settingRouter);
+
+app.use("/api/v1/dashboard", dashboardRouter);
 
 app.use(errorHandler);
 
