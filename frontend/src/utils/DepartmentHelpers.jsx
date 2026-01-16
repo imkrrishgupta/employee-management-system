@@ -33,7 +33,7 @@ export const DepartmentButtons = ({_id, onDepartmentDelete}) => {
                 // After deleting, if we not filter the data then it will not automatically render to the frontend
                 
                 if (response.data.success){
-                    onDepartmentDelete(_id);
+                    onDepartmentDelete?.(_id);
                 }
                 
             } catch (error) {

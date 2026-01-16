@@ -11,12 +11,16 @@ const DepartmentList = () => {
 
   const API = api;
 
-  const onDepartmentDelete = async (_id) => {
-    const data = departments.filter((dep) => dep._id !== _id);
-    
-    setDepartments(data);
+  const onDepartmentDelete = (_id) => {
+    setDepartments(
+      (prev) => prev.filter((dep) => dep._id !== _id)
+    );
 
-  }
+  };
+
+  useEffect(() => {
+    setFilteredDepartments(departments);
+  }, [departments]);
 
   useEffect(() => {
     const fetchDepartments = async () => {
@@ -38,7 +42,7 @@ const DepartmentList = () => {
           ))
 
           setDepartments(data);
-          setFilteredDepartments(data);
+          // setFilteredDepartments(data);
 
         }
 

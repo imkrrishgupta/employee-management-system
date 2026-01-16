@@ -95,16 +95,19 @@ const updateDepartment = asyncHandler(async (req, res) => {
 const deleteDepartment = asyncHandler(async (req, res) => {
     const { _id } = req.params;
 
-    const deleteDep = await Department.findByIdAndDelete({_id});
+    const deleteDep = await Department.findById(_id);
 
     if (!deleteDep){
         throw new ApiError(404, "Department not found");
     }
 
+    await deleteDep.deleteOne();
+
     return res
         .status(200)
         .json(new ApiResponse(
             200,
+            null,
             "Department deleted successfully"
         ));
 
